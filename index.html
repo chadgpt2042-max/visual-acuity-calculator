@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Acuity Calculator</title>
+    <title>SnellnView - Make your text readable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +13,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -27,8 +28,28 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
             border: 1px solid #f0f0f0;
             padding: 40px;
-            max-width: 600px;
+            max-width: 1200px;
             width: 100%;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 20px;
         }
 
         .header {
@@ -38,14 +59,15 @@
 
         .header h1 {
             color: #2c2c2c;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 300;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
         .header p {
-            color: #888;
-            font-size: 1.1rem;
+            color: #666;
+            font-size: 1.4rem;
+            font-weight: 500;
         }
 
         .form-group {
@@ -206,8 +228,8 @@
             background: #f8f8f8;
             border-radius: 15px;
             padding: 25px;
-            margin-top: 20px;
             border: 1px solid #e8e8e8;
+            width: 100%;
         }
 
         .simulator h3 {
@@ -274,7 +296,7 @@
 
         .sample-text {
             color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-weight: 600;
             text-align: center;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -294,6 +316,15 @@
         }
 
         @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .right-column {
+                position: static;
+            }
+            
             .input-row {
                 grid-template-columns: 1fr;
             }
@@ -303,7 +334,11 @@
             }
             
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.8rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -311,111 +346,116 @@
 <body>
     <div class="calculator-container">
         <div class="header">
-            <h1>Visual Acuity Calculator</h1>
-            <p>Calculate minimum readable text size based on screen specifications and visual acuity</p>
+            <h1>SnellnView</h1>
+            <p>Make your text readable</p>
         </div>
 
-        <div class="unit-toggle">
-            <label class="toggle-label">Unit System:</label>
-            <div class="toggle-buttons">
-                <button type="button" id="imperialBtn" class="toggle-btn active">Imperial</button>
-                <button type="button" id="metricBtn" class="toggle-btn">Metric</button>
-            </div>
-        </div>
-
-        <form id="calculatorForm">
-            <div class="form-group">
-                <label for="screenSize" id="screenSizeLabel">Screen Diagonal Size (inches)</label>
-                <input type="number" id="screenSize" step="0.1" min="1" placeholder="e.g., 13.3" required>
-            </div>
-
-            <div class="input-row">
-                <div class="form-group">
-                    <label for="screenWidth">Screen Width (pixels)</label>
-                    <input type="number" id="screenWidth" min="1" placeholder="e.g., 1920" required>
-                </div>
-                <div class="form-group">
-                    <label for="screenHeight">Screen Height (pixels)</label>
-                    <input type="number" id="screenHeight" min="1" placeholder="e.g., 1080" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="snellenAcuity">Snellen Acuity</label>
-                <select id="snellenAcuity" required>
-                    <option value="">Select acuity level</option>
-                    <option value="20/10">20/10 (Excellent)</option>
-                    <option value="20/15">20/15 (Very Good)</option>
-                    <option value="20/20">20/20 (Normal)</option>
-                    <option value="20/25">20/25 (Mild)</option>
-                    <option value="20/30">20/30 (Mild)</option>
-                    <option value="20/40">20/40 (Moderate)</option>
-                    <option value="20/50">20/50 (Moderate)</option>
-                    <option value="20/60">20/60 (Moderate)</option>
-                    <option value="20/70">20/70 (Moderate)</option>
-                    <option value="20/80">20/80 (Moderate)</option>
-                    <option value="20/100">20/100 (Poor)</option>
-                    <option value="20/200">20/200 (Poor)</option>
-                    <option value="20/400">20/400 (Very Poor)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="viewingDistance" id="viewingDistanceLabel">Viewing Distance (feet)</label>
-                <input type="number" id="viewingDistance" step="0.1" min="0.1" placeholder="e.g., 1.7" required>
-            </div>
-
-            <button type="submit" class="calculate-btn">Calculate Minimum Text Size</button>
-        </form>
-
-        <div id="errorMessage" class="error" style="display: none;"></div>
-
-        <div id="results" class="results" style="display: none;">
-            <h3>Calculation Results</h3>
-            <div class="result-item">
-                <span class="result-label">Screen PPI (Pixels Per Inch)</span>
-                <span class="result-value" id="ppiResult">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label" id="heightInchesLabel">Minimum Character Height (inches)</span>
-                <span class="result-value" id="heightInchesResult">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Minimum Character Height (pixels)</span>
-                <span class="result-value" id="heightPixelsResult">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Recommended Font Size (px)</span>
-                <span class="result-value" id="fontSizeResult">-</span>
-            </div>
-        </div>
-
-        <div id="simulator" class="simulator" style="display: none;">
-            <h3>Visual Simulator</h3>
-            <div class="simulator-container">
-                <div class="simulator-info">
-                    <p>This shows how your screen would look with the calculated minimum readable text size:</p>
-                    <div class="simulator-stats">
-                        <span id="simulatorScreenSize">Screen: -</span>
-                        <span id="simulatorDistance">Distance: -</span>
-                        <span id="simulatorAcuity">Acuity: -</span>
+        <div class="main-content">
+            <div class="left-column">
+                <div class="unit-toggle">
+                    <label class="toggle-label">Unit System:</label>
+                    <div class="toggle-buttons">
+                        <button type="button" id="imperialBtn" class="toggle-btn active">Imperial</button>
+                        <button type="button" id="metricBtn" class="toggle-btn">Metric</button>
                     </div>
                 </div>
-                <div class="screen-container">
-                    <div id="screenRectangle" class="screen-rectangle">
-                        <div id="sampleText" class="sample-text">Sample Text</div>
+
+                <form id="calculatorForm">
+                    <div class="form-group">
+                        <label for="screenSize" id="screenSizeLabel">Screen Diagonal Size (inches)</label>
+                        <input type="number" id="screenSize" step="0.1" min="1" placeholder="e.g., 13.3" required>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label for="screenWidth">Screen Width (pixels)</label>
+                            <input type="number" id="screenWidth" min="1" placeholder="e.g., 1920" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="screenHeight">Screen Height (pixels)</label>
+                            <input type="number" id="screenHeight" min="1" placeholder="e.g., 1080" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="snellenAcuity">Snellen Acuity</label>
+                        <select id="snellenAcuity" required>
+                            <option value="">Select acuity level</option>
+                            <option value="20/10">20/10 (Excellent)</option>
+                            <option value="20/15">20/15 (Very Good)</option>
+                            <option value="20/20">20/20 (Normal)</option>
+                            <option value="20/25">20/25 (Mild)</option>
+                            <option value="20/30">20/30 (Mild)</option>
+                            <option value="20/40">20/40 (Moderate)</option>
+                            <option value="20/50">20/50 (Moderate)</option>
+                            <option value="20/60">20/60 (Moderate)</option>
+                            <option value="20/70">20/70 (Moderate)</option>
+                            <option value="20/80">20/80 (Moderate)</option>
+                            <option value="20/100">20/100 (Poor)</option>
+                            <option value="20/200">20/200 (Poor)</option>
+                            <option value="20/400">20/400 (Very Poor)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="viewingDistance" id="viewingDistanceLabel">Viewing Distance (feet)</label>
+                        <input type="number" id="viewingDistance" step="0.1" min="0.1" placeholder="e.g., 1.7" required>
+                    </div>
+
+                    <button type="submit" class="calculate-btn">Calculate Minimum Text Size</button>
+                </form>
+
+                <div id="errorMessage" class="error" style="display: none;"></div>
+
+                <div id="results" class="results" style="display: none;">
+                    <h3>Calculation Results</h3>
+                    <div class="result-item">
+                        <span class="result-label">Screen PPI (Pixels Per Inch)</span>
+                        <span class="result-value" id="ppiResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label" id="heightInchesLabel">Minimum Character Height (inches)</span>
+                        <span class="result-value" id="heightInchesResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Minimum Character Height (pixels)</span>
+                        <span class="result-value" id="heightPixelsResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Recommended Font Size (px)</span>
+                        <span class="result-value" id="fontSizeResult">-</span>
                     </div>
                 </div>
-                <div class="simulator-note">
-                    <small>Note: This is a proportional representation. The actual text size will depend on your browser's zoom level.</small>
+
+                <div class="info-box">
+                    <strong>How it works:</strong> This calculator determines the minimum readable text size based on your screen specifications and visual acuity. The calculation considers screen pixel density, viewing distance, and the minimum angular size required for your acuity level.
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div id="simulator" class="simulator">
+                    <h3>Visual Simulator</h3>
+                    <div class="simulator-container">
+                        <div class="simulator-info">
+                            <p>Enter your screen specifications and visual acuity to see how readable text would appear:</p>
+                            <div class="simulator-stats">
+                                <span id="simulatorScreenSize">Screen: Enter details</span>
+                                <span id="simulatorDistance">Distance: Enter details</span>
+                                <span id="simulatorAcuity">Acuity: Select level</span>
+                            </div>
+                        </div>
+                        <div class="screen-container">
+                            <div id="screenRectangle" class="screen-rectangle">
+                                <div id="sampleText" class="sample-text">Enter details to see preview</div>
+                            </div>
+                        </div>
+                        <div class="simulator-note">
+                            <small>Note: This is a proportional representation. The actual text size will depend on your browser's zoom level.</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="info-box">
-            <strong>How it works:</strong> This calculator determines the minimum readable text size based on your screen specifications and visual acuity. The calculation considers screen pixel density, viewing distance, and the minimum angular size required for your acuity level.
-        </div>
-    </div>
 
     <script>
         let isMetric = false;
@@ -601,9 +641,9 @@
             // Update the sample text
             const sampleTextElement = document.getElementById('sampleText');
             sampleTextElement.style.fontSize = `${simulatorFontSize}px`;
+            sampleTextElement.textContent = 'Sample Text';
             
-            // Show the simulator
-            document.getElementById('simulator').style.display = 'block';
+            // Simulator is now always visible
         }
     </script>
 </body>
