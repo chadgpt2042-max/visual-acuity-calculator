@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ffffff;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -24,7 +24,8 @@
         .calculator-container {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
             padding: 40px;
             max-width: 600px;
             width: 100%;
@@ -36,14 +37,14 @@
         }
 
         .header h1 {
-            color: #333;
+            color: #2c2c2c;
             font-size: 2.5rem;
             margin-bottom: 10px;
             font-weight: 300;
         }
 
         .header p {
-            color: #666;
+            color: #888;
             font-size: 1.1rem;
         }
 
@@ -54,7 +55,7 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: #2c2c2c;
             font-weight: 500;
             font-size: 1.1rem;
         }
@@ -62,15 +63,17 @@
         .form-group input, .form-group select {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e1e5e9;
+            border: 2px solid #e8e8e8;
             border-radius: 10px;
             font-size: 1.1rem;
             transition: border-color 0.3s ease;
+            background: #fafafa;
         }
 
         .form-group input:focus, .form-group select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #d0d0d0;
+            background: white;
         }
 
         .input-row {
@@ -82,30 +85,32 @@
         .calculate-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #2c2c2c;
             color: white;
             border: none;
             border-radius: 10px;
             font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.2s ease;
             margin-bottom: 30px;
         }
 
         .calculate-btn:hover {
-            transform: translateY(-2px);
+            background: #404040;
+            transform: translateY(-1px);
         }
 
         .results {
-            background: #f8f9fa;
+            background: #f8f8f8;
             border-radius: 15px;
             padding: 25px;
             margin-top: 20px;
+            border: 1px solid #e8e8e8;
         }
 
         .results h3 {
-            color: #333;
+            color: #2c2c2c;
             margin-bottom: 20px;
             font-size: 1.3rem;
         }
@@ -115,7 +120,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid #e1e5e9;
+            border-bottom: 1px solid #e8e8e8;
         }
 
         .result-item:last-child {
@@ -123,32 +128,32 @@
         }
 
         .result-label {
-            color: #666;
+            color: #888;
             font-weight: 500;
         }
 
         .result-value {
-            color: #333;
+            color: #2c2c2c;
             font-weight: 600;
             font-size: 1.1rem;
         }
 
         .error {
-            background: #fee;
-            color: #c33;
+            background: #f8f8f8;
+            color: #666;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            border-left: 4px solid #c33;
+            border-left: 4px solid #d0d0d0;
         }
 
         .info-box {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: #f8f8f8;
+            color: #666;
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
-            border-left: 4px solid #2196f3;
+            border-left: 4px solid #d0d0d0;
         }
 
         .unit-toggle {
@@ -157,20 +162,21 @@
             justify-content: center;
             margin-bottom: 30px;
             padding: 20px;
-            background: #f8f9fa;
+            background: #f8f8f8;
             border-radius: 15px;
+            border: 1px solid #e8e8e8;
         }
 
         .toggle-label {
             margin-right: 15px;
-            color: #333;
+            color: #2c2c2c;
             font-weight: 500;
             font-size: 1.1rem;
         }
 
         .toggle-buttons {
             display: flex;
-            background: #e1e5e9;
+            background: #e8e8e8;
             border-radius: 10px;
             padding: 4px;
         }
@@ -179,7 +185,7 @@
             padding: 10px 20px;
             border: none;
             background: transparent;
-            color: #666;
+            color: #888;
             font-weight: 500;
             cursor: pointer;
             border-radius: 8px;
@@ -188,23 +194,24 @@
 
         .toggle-btn.active {
             background: white;
-            color: #667eea;
+            color: #2c2c2c;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .toggle-btn:hover:not(.active) {
-            color: #333;
+            color: #2c2c2c;
         }
 
         .simulator {
-            background: #f8f9fa;
+            background: #f8f8f8;
             border-radius: 15px;
             padding: 25px;
             margin-top: 20px;
+            border: 1px solid #e8e8e8;
         }
 
         .simulator h3 {
-            color: #333;
+            color: #2c2c2c;
             margin-bottom: 20px;
             font-size: 1.3rem;
         }
@@ -221,7 +228,7 @@
         }
 
         .simulator-info p {
-            color: #666;
+            color: #888;
             margin-bottom: 15px;
         }
 
@@ -233,8 +240,8 @@
         }
 
         .simulator-stats span {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: #e8e8e8;
+            color: #666;
             padding: 8px 12px;
             border-radius: 8px;
             font-size: 0.9rem;
@@ -245,12 +252,12 @@
             width: 100%;
             max-width: 400px;
             aspect-ratio: 16/9;
-            background: #000;
+            background: #2c2c2c;
             border-radius: 10px;
-            border: 3px solid #333;
+            border: 3px solid #404040;
             position: relative;
             margin: 20px 0;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .screen-rectangle {
@@ -528,7 +535,9 @@
                 
                 // Calculate minimum angular size (in arcminutes)
                 // Standard Snellen chart uses 5 arcminutes for 20/20 vision
-                const minAngularSizeArcminutes = 5 * acuityRatio;
+                // For worse vision (higher denominator), we need LARGER angular size
+                // So we use the INVERSE of the acuity ratio
+                const minAngularSizeArcminutes = 5 / acuityRatio;
                 
                 // Convert arcminutes to radians
                 const minAngularSizeRadians = minAngularSizeArcminutes * (Math.PI / 180) / 60;
